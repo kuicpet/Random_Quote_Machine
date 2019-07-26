@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Quote Machine</title>
+  </head>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: baseline;
+}
+
+div {
+  position:relative;
+  z-index: 2;
+}
+
+body {
+  background-color: #333;
+  color: #333;
+  font-family: 'Raleway', sans-serif;
+  font-weight:400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#quote-box {
+  border-radius:none;
+  position:relative;
+  width:450px;
+  padding:40px 50px;
+  display:table;
+  background-color:white;}
+  .quote-text {
+    text-align:center;
+    width:450px;
+    height:auto;
+    clear:both;
+    font-weight:500;
+    font-size:1.75em;
+  }
+  .quote-author {
+    width:450px;
+    height:auto;
+    clear:both;
+    padding-top:20px;
+    font-size:1em; 
+    text-align:right;
+  }
+  i{
+      font-size:1.0em;
+      margin-right: 0.4em;
+    }
+  .buttons {
+    width:450px;
+    margin:auto;
+    display:block;}
+    .button {
+      height:38px;
+      border:none;
+      border-radius:3px;
+      color:white;
+      background-color:#333;
+      outline:none;
+      font-size:0.85em;
+      padding: 8px 18px 6px 18px;
+      margin-top:30px;
+      opacity:1;
+      cursor:pointer;}
+      button:hover {
+        opacity:0.9;
+      }
+      #tweet-quote{
+        float:left;
+        padding:0px;
+        padding-top:8px;
+        text-align:center;
+        font-size:1.2em;
+        margin-right:5px;
+        height:30px;
+        width:40px;
+      }
+      #new-quote {
+        float:right;
+      }
+  h1 {color:white;text-align: center;font-weight: 400;font-size: 2.5em;
+  margin-bottom: 0.5em;}
+  h4 {color:white;text-align: center;font-weight: 200;margin-top: 0.9em;}
+  a {text-decoration: none;color:white;}
+  </style>
+  <body>
+      <div id="wrapper">
+        <header><h1>Random Quote Machine</h1></header>
+          <div id="quote-box">
+            <div class="quote-text">
+              <span id="text">We know what we are, but know not what we may be.</span>
+            </div>
+            <div class="quote-author">
+              - <span id="author">William Shakespeare</span>
+            </div>
+            <div class="buttons">
+              <a class="button" id="tweet-quote" title="Tweet this quote!" target="_blank">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <button class="button" id="new-quote" title="Get a New Quote">New Quote</button>
+            </div>
+          </div>
+          <footer><h4>By <a href="https://codepen.io/kuic/"> Kingsley Umujeyan</a></h4></footer>
+        </div>
+    
+  </body>
+  <script>
+    const projectName = 'Random Quote Machine';
+    const quotes = [{
+      text: 'Well Bones, do the new medical facilities meet with your approval?',
+  author: 'Kirk'
+}, {
+  text: 'Live long and prosper',
+  author: 'Spock'
+}, {
+  text: 'Computers make excellent and efficient servants, but I have no wish to serve under them.',
+  author: 'Spock'
+}, {
+  text: 'In critical moments, men sometimes see exactly what they wish to see.',
+  author: 'Spock'
+}, {
+  text: 'When you eliminate the impossible, whatever remains, however improbable, must be the truth.',
+  author: 'Spock'
+}, {
+text: 'The needs of the many outweigh the needs of the few.',
+  author: 'Spock'
+}, {
+text: 'What am I, a doctor or a moon-shuttle conductor?',
+  author: 'McCoy'
+}, {
+text: 'Resistance Is Futile',
+  author: 'Borg '
+}, {
+text: 'In Space, all warriors are Cold Warriors.',
+  author: 'Klingon Proverb'
+}, {
+  text: 'How we deal with death is at least as important as how we deal with life',
+  author: 'Kirk'},
+  {
+    text:'We know what we are, but know not what we may be.',
+    author: 'William Shakespeare'
+    }]
+    const text = document.getElementById('text');
+    const author = document.getElementById('author');
+    const newQuoteBtn = document.getElementById('new-quote');
+    const tweetBtn = document.getElementById('tweet-quote');
+    let currentRnd = -1;
+
+    const fetchQuote = ()=>{
+      let rnd;
+      do {
+        rnd = Math.floor(Math.random()* quotes.length)
+      } while (currentRnd === rnd)
+    
+
+    currentRnd = rnd;
+
+    text.innerHTML = quotes[rnd].text;
+    author.innerHTML = quotes[rnd].author;
+
+    tweetBtn.setAttribute('href','https://twitter.com/intent/tweet?text=${text.innerHTML}')
+  }
+  (function(){
+    fetchQuote();
+  })();
+  newQuoteBtn.addEventListener('click',()=>{fetchQuote();})
+
+  </script>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
